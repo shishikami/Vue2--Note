@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="addCount">+1</button>
+        <button v-on:click="subCount">-1</button>
+        <button v-on:click="addN(10)">+10</button>
+        <p>Number为:{{count}}</p>
+    </div>
+
+    <script>
+        // 绑定事件指令
+        // v-on
+        // 格式：v-on:事件名称="事件处理函数名称"
+        // e.g. v-on:click="addCount"
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                count: 12
+            },
+            // methods属性中可以定义事件的处理函数
+            methods: {
+                // 可以简写为：
+                // addCount(){}
+                addCount: function () {
+                    // vm.count += 1;
+                    // 改用this this完全等价于vm
+                    this.count++;
+                },
+                subCount() {
+                    // vm.count -= 1;
+                    this.count--;
+                },
+                // 绑定事件可以用()传递参数
+                addN(n) {
+                    this.count += n;
+                }
+            }
+        })
+        // 可以简写为
+        // @
+        // 原生事件 e.g. onclick oninput onkeyup
+        // 分别修改为 v-on:click input keyup
+        // 原生事件只需要把on去掉即可
+    </script>
+    <div id="app2">
+        <p>count:{{count}}</p>
+        <button @click="add(1,$event)">+N</button>
+    </div>
+    <script>
+        const vm2 = new Vue({
+            el: '#app2',
+            data: {
+                count: 0,
+            },
+            methods: {
+                // 没有参数传入时默认为事件event
+                // 带了参数时无法访问到event
+                // Vue提供了内置变量
+                // $event 原生DOM事件event
+                // 将$event传入参数即可 必须固定为$event
+                add(n, e) {
+                    this.count += n;
+                    console.log(e);
+                    if (this.count % 2 === 0) {
+                        e.target.style.backgroundColor = 'red';
+                    } else {
+                        e.target.style.backgroundColor = '';
+                    }
+                }
+            }
+        })
+    </script>
+    <script>
+        // 事件修饰符
+        // 在绑定的事件后面添加即可
+        // .prevent 阻止默认行为
+        // .stop    阻止事件冒泡
+        // .capture 以捕获模式触发当前的事件处理函数
+        // .once    绑定的事件只触发一次
+        // .self    只有在event.target是当前元素自身时触发事件处理函数
+    </script>
+    <div id="app3">
+        <a href="www.baidu.com" @click.prevent="show">aaaaaaaaaa</a>
+        <hr>
+        <div style="height:100px; background-color:red" @click="divClick">
+            <button @click.stop="btnClick">Button</button>
+        </div>
+    </div>
+    <script>
+        const vm3 = new Vue({
+            el: '#app3',
+            data: {
+            },
+            methods: {
+                show() {
+                    console.log('aaaa');
+                },
+                divClick() {
+                    console.log('Div click');
+                },
+                btnClick() {
+                    console.log('Btn Click');
+                }
+            }
+        })
+    </script>
+    <script>
+        // 按键修饰符
+        // @keyup每次键盘事件都会触发
+        // @keyup.esq @keyup.enter比较常用
+    </script>
+    <div id="app4">
+        <input type="text" @keyup.esc="clear" @keyup.enter="enter">
+    </div>
+    <script>
+        const vm4 = new Vue({
+            el: '#app4',
+            data: {
+            },
+            methods: {
+                clear(e) {
+                    // console.log('Clear');
+                    e.target.value = '';
+                },
+                enter(e) {
+                    console.log('发送');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

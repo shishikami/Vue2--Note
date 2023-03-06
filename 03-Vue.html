@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 使用
+        // 1.导入Vue.js
+        // 2.页面结构中声明要被Vue所控制的DOM区域
+        // 3.创建vm实例对象（vue实例对象）
+    </script>
+    <script src="./jssource/vue-2.6.12.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 采用这个形式渲染数据{{}} -->
+    <!-- View区域 -->
+    <div id="app">{{username}}</div>
+
+    <script>
+        // 导入库文件，window全局有了Vue构造函数
+        // 创建实例对象
+        // 传入配置属性
+        // vm就是ViewModel
+        const vm = new Vue({
+            // el固定写法 表示控制区域 接受值为选择器
+            el: '#app',
+            // 渲染数据
+            // Model数据源
+            data: {
+                username: 'zhangsan'
+            }
+        });
+    </script>
+
+    <script>
+        // 指令 Directions
+        // vue提供的模板语法 用于辅助开发者渲染页面的基本结构
+        // 1.内容渲染
+        // 2.属性绑定
+        // 3.事件绑定
+        // 4.双向绑定
+        // 5.条件渲染
+        // 6.列表渲染
+
+        // 一.内容渲染指令
+        // 渲染DOM元素的文本内容
+        // 1. v-text
+        // 2. {{}}
+        // 3. v-html
+    </script>
+    <!-- 把usertext对应的值渲染到p标签中 -->
+    <div id="app2">
+        <p v-text="usertext"></p>
+        <p v-text="gender"></p>
+    </div>
+    <script>
+        // 1.v-text
+        const vm2 = new Vue({
+            el: '#app2',
+            data: {
+                usertext: 'usertext',
+                gender: 'female'
+            }
+        });
+        // 会覆盖原本的值
+    </script>
+    <div id="app3">
+        <p>姓名：{{name}}</p>
+        <p>性别：{{gender}}</p>
+        <p>{{htmltext}}</p>
+        <p v-html="description"></p>
+    </div>
+    <script>
+        // 2.{{}} Mustache 插值表达式
+        // 使用插值表达式 将对应的值渲染到元素的内容节点中
+        // 同时保留元素的默认值
+        const vm3 = new Vue({
+            el: '#app3',
+            data: {
+                name: 'zhangsan',
+                gender: 'male',
+                htmltext: '<h1>这是个标题</h1>',
+                description: '<h1>这是个标题</h1>'
+            }
+        })
+        // 使用频率最高
+        // 3. v-html
+        // v-text {{}}只能渲染纯文本内容
+        // 如果要把含HTML标签的字符串渲染为HTML页面 需要v-html
+    </script>
+</body>
+
+</html>

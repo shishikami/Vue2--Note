@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // v-for
+        // 基于一个数组来循环渲染一个列表结构
+        // 使用item in items的形式的特殊语法
+        // item被循环的每一项
+        // items待循环的数组
+
+        // 支持一个可选的第二参数：当前项的索引
+        // 格式：
+        // (item, index) in items
+
+        // 添加到被循环的结构上
+        // 官方推荐 在绑定v-for时绑定一个key属性
+        // :key = "item.id"
+        // 并且尽量将id作为key属性的值
+        // key的值类型有要求：只能是字符串或者数字类型
+        // 必须具有唯一性
+        // 不要使用index 不具有唯一性
+    </script>
+    <div id="app">
+        <ul>
+            <li v-for="item in list">姓名是：{{item.name}}</li>
+        </ul>
+        <hr>
+        <table style="border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <td style="border: 1px solid black">index</td>
+                    <td style="border: 1px solid black">id</td>
+                    <td style="border: 1px solid black">name</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in list" :key="item.id">
+                    <td style="border: 1px solid black">{{ index }}</td>
+                    <td style="border: 1px solid black">{{ item.id }}</td>
+                    <td style="border: 1px solid black">{{ item.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    { id: 1, name: 'zs' },
+                    { id: 2, name: 'ls' },
+                ]
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

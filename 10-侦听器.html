@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Watch侦听器
+        // 监视数据的变化 针对数据的变化做特定的操作
+
+        // 本质为函数，要监视哪个数据，就把哪个数据当作方法名
+        // 新值在前，旧值在后
+
+        // 方法侦听器
+        // * 方法格式的侦听器无法在进入页面的时候自动触发
+        //   如果侦听的是对象，对象属性变化不会触发侦听器
+
+        // 对象格式的侦听器：
+        // watch: {
+        //     username: {
+        //         handler(newVal, oldVal){
+        //             // sth
+        //         },
+        //         immediate: true,
+        //     }
+        // }
+
+        // * immediate属性
+        // 默认为false
+        // 用于控制侦听器是否自动触发一次
+
+        // * deep属性
+        // 对象格式侦听器通过deep来侦听对象的属性
+        // 默认为false
+
+        // 可以直接侦听对象的属性
+        // 必须加单引号
+        // 格式：
+        // 'info.username'
+    </script>
+    <div id="app">
+        <p>{{username}}</p>
+        <input type="text" v-model="username">
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                username: 'aaa',
+            },
+            methods: {
+
+            },
+            watch: {
+                username(newVal, oldVal) {
+                    console.log(newVal, oldVal);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

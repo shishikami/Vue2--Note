@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 条件渲染指令
+        // 按需控制DOM的显示与隐藏
+        // v-if
+        // v-show
+        // 条件为false会被隐藏
+        // v-show   通过display：none隐藏元素
+        // v-if     动态的移除了元素
+        // 频繁切换的话v-show性能更好
+        // 实际开发可以简单粗暴一点 都用v-if
+
+        // v-if可以配合v-else-if  v-else使用
+    </script>
+    <div id="app">
+        <p v-if="flag">v-if element</p>
+        <p v-show="flag">v-show element</p>
+        <hr>
+        <p v-if="type=='A'">A</p>
+        <p v-else-if="type=='B'">B</p>
+        <p v-else>寄</p>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true,
+                type: 'A',
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

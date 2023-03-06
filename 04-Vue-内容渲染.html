@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-bind:placeholder="tip">
+    </div>
+
+    <script>
+        // 二、属性绑定
+        // 插值表达式只能用在内容节点
+        // 不能用在属性节点
+
+        // 为元素的属性动态绑定值 属性前面添加：
+        // v-bind:
+        // 可以简写为：
+        // ：
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                tip: '请输入内容'
+            }
+        })
+        // 使用js表达式
+        // 模板渲染语法除了支持绑定简单的数据值之外
+        // 还支持js表达式的运算
+    </script>
+
+    <div id="app2">
+        <p>{{ number + 1 }}</p>
+        <p>{{ ok ? 'YES' : 'NO' }}</p>
+        <p>{{ message.split('').reverse().join('') }}</p>
+        <p :id="'list-' + id">查我id</p>
+    </div>
+    <script>
+        const vm2 = new Vue({
+            el: '#app2',
+            data: {
+                number: 2,
+                ok: true,
+                message: "abc efg ijk",
+                id: "999"
+            }
+        })
+        // v-bind 如果绑定内容需要进行动态拼接 非拼接内容加''
+    </script>
+</body>
+
+</html>

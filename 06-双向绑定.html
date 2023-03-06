@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 双向数据绑定指令
+        // 不操作DOM的情况下快速获取表单数据
+        // v-model
+        // v-bind为单向绑定 数据源的变动影响页面
+        // 但页面的变化不影响数据源
+        // v-model是双向绑定，页面和数据源互相影响
+        // 表单数据比较常用
+    </script>
+    <div id="app">
+        <p>userName = {{username}}</p>
+        <p>v-model</p>
+        <input type="text" v-model="username">
+        <p>v-bind</p>
+        <input type="text" v-bind:value="username">
+        <hr>
+        <select v-model="city">
+            <option value="0">请选择城市</option>
+            <option value="1">北京</option>
+            <option value="2">上海</option>
+            <option value="3">广州</option>
+        </select>
+        <hr>
+        <!-- 好香 -->
+        <input type="text" v-model.number="n1">+<input type="text" v-model.number="n2">={{n1+n2}}
+        <hr>
+        <input type="text" v-model.trim="name">
+        <button @click="btnclick">确定</button>
+        <hr>
+        <input type="text" v-model.lazy="name">
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                username: 'zhangsan',
+                city: '1',
+                n1: 0,
+                n2: 0,
+                name: ''
+            },
+            methods: {
+                btnclick() {
+                    console.log(`用户名为："${this.name}"`)
+                }
+            }
+        });
+    </script>
+    <script>
+        // v-model特有的修饰符
+        // .number 自动将用户输入的值转化为数值类型
+        // .trim   自动过滤用户输入的首位空白字符
+        // .lazy   在change时而非input时更新
+    </script>
+</body>
+
+</html>

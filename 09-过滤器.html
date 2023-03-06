@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jssource/vue-2.6.12.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 仅在Vue2中可以使用
+        // Filters 用于文本的格式化
+        // 可用范围：插值表达式 v-bind属性绑定
+        // 添加在js表达式的尾部，由管道符进行调用
+        // e.g.
+        // <p>{{ message | capitalize }}</p>
+        // <div v-bind:id="rawId | formatId"></div>
+
+        // 过滤器形参中的val为管道符前面的值
+
+        // 私有过滤器和全局过滤器
+        // 定义到filters节点中的过滤器都是私有过滤器
+        // 全局过滤器：
+        // Vue.filter('name',function)
+        // name 过滤器名字
+        // function 处理函数
+        // Vue.filter('cap',(val)=>{
+        //     return ...
+        // })
+        // * 全局过滤器和私有过滤器重名
+        //   按照就近原则，调用私有过滤器
+
+        // 连续调用多个过滤器
+        // 调用顺序：从前往后
+
+        // 过滤器本质是函数，可以传参
+        // message | filter
+        // filter(msg,arg1,arg2)
+        // 第一个永远是传入的值
+    </script>
+    <div id="app">
+        <p>original:{{ message }}</p>
+        <p>processed:{{ message | capitalize }}</p>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello vue.js'
+            },
+            methods: {},
+            filters: {
+                capitalize(val) {
+                    let firstChar = val.charAt(0).toUpperCase();
+                    let elseChar = val.slice(1);
+                    return firstChar + elseChar;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -76,3 +76,103 @@ const p = new Promise();
 // 3.then()用来预先指定成功和失败的回调函数
 p.then(result => { }, errror => { })
 // 成功的回调函数必选 失败的回调函数可选
+
+// --------------------------------------
+// 通过 .catch 捕获错误
+// .catch(err){console,log(err)}
+// .catch放置在最后可以捕获所有错误，但是出错位置之后的其余代码不再执行
+// 如果希望希望出现错误后仍能继续执行，可以将catch语句前置
+
+/*
+Promise.all() 方法
+发起并行的Promise异步操作，
+等所有的异步操作全部结束后才会执行下一步的.then操作
+
+Promise.race() 方法
+同样发起并行的Promise异步操作
+但是只要一个异步操作完成就立即执行下一步的.then操作
+*/
+
+function getFile(path) {
+    return new Promise(function (resolve, reject) {
+        // 读取文件的操作
+        FileSystem.readFile(path, 'utf-8', (err, dataStr) => {
+            if (err) {
+                return reject(err);
+            } else {
+                resolve(dataStr);
+            }
+        })
+    })
+}
+// 此处的回调函数分别对应着function(resolve,reject)
+getFile("文件地址").then("成功的回调函数", "失败的回调函数");
+
+/*
+async/await
+async/await 是ES8引入的新语法，用来简化Promise异步操作
+在此之前只能通过.then()的链式调用方式处理Promise异步操作
+ -- .then 优点在于解决了回调地狱
+     但是也有 代码冗余、阅读性差、不易理解 的缺点
+
+基本使用
+如果一个调用的返回值为Promise对象 即可添加await
+修饰完毕后返回的是一个值
+方法体内使用了await的方法要添加async
+
+ -- 在async方法中 第一个await之前的代码会被同步执行
+    第一个await之后的代码会异步执行
+*/
+
+// --------------------------------------
+
+/**
+JS是单线程语言 同一时间只能做一件事
+如果前一个任务非常耗时 后续的任务就会一直等待 导致程序假死
+
+Js中待执行的任务分为两类：
+1. 同步任务 synchronous：
+    非耗时任务 指的是在主线程上排队执行的任务
+    只有前一个任务结束才能执行下一个
+2. 异步任务 asynchronous
+    称作耗时任务 异步任务由js委托给宿主环境进行执行
+    当异步任务执行完成后，会通知js主线程执行异步任务的回调函数
+
+同步任务和异步任务执行过程
+Js主线程 + 宿主环境 + 任务队列
+（1）同步任务由js主线程次序执行
+（2）异步任务委托给宿主环境
+（3）已完成的异步任务对应的回调函数加入到任务队列中等待执行
+（4）主线程执行栈被清空后，读取任务队列的回调函数，次序执行
+（5）不断重复（4）
+
+（4）这一步骤是循环不断的，所以这个运行机制又叫做EventLoop(事件循环)
+ */
+
+/*
+宏任务和微任务
+js把异步任务作了进一步划分 异步任务分为两类：宏任务macrotask 微任务microtask
+1. 宏任务
+    异步Ajax
+    setTimeout setInterval
+    文件操作
+    其他宏任务
+2. 微任务
+    Promise.then .cath .finally
+    process.nextTick
+    其他微任务
+
+宏任务和微任务的执行顺序：
+每一个宏任务执行完成之后 检查是否有微任务
+如果有 则执行完所有微任务之后 再继续执行下一个宏任务
+
+ */
+
+/*
+try...catch捕获异常
+try{
+    ...
+}catch(err){
+    ...
+}
+ */
